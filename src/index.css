@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --font-serif: Georgia, "Times New Roman", serif;
+
+  --color-paper: #f6efdf;
+  --color-card: #ffffff;
+  --color-card-alt: #fbf5e7;
+  --color-line: #e6d9bc;
+  --color-line-soft: #efe6cf;
+
+  --color-ink: #3b2a1e;
+  --color-ink-soft: #6b5744;
+  --color-muted: #9c8c71;
+
+  --color-bark: #3e2a1c;
+  --color-bark-active: #4f3826;
+
+  --color-honey: #b8862e;
+  --color-honey-dark: #96691e;
+  --color-honey-light: #f7ecd3;
+
+  --color-olive: #5b7553;
+  --color-olive-dark: #435940;
+  --color-olive-light: #e8eee3;
+
+  --color-rust: #a6512e;
+  --color-rust-dark: #833f23;
+  --color-rust-light: #f5e4d8;
+
+  --color-crimson: #a63446;
+  --color-crimson-dark: #832233;
+  --color-crimson-light: #f5e1e3;
+
+  --color-slate: #4f6d8a;
+  --color-slate-dark: #3f5a73;
+  --color-slate-light: #e4ecf3;
+
+  --color-plum: #7a5c8e;
+  --color-plum-dark: #5b4570;
+  --color-plum-light: #eee6f3;
+}
+
+html {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  overscroll-behavior-y: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+input,
+select,
+textarea {
+  font-size: 16px;
+}
+
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.safe-top {
+  padding-top: env(safe-area-inset-top);
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
