@@ -21,7 +21,9 @@ export default function VodafonePage() {
 
   const inflow = derived.inflows.reduce((sum, row) => sum + row.txn.amount, 0);
   const outflow = data.expenses.reduce((sum, e) => sum + e.amount, 0);
-  const expenses = [...data.expenses].sort((a, b) => b.date.localeCompare(a.date));
+  const expenses = [...data.expenses].sort((a, b) =>
+    b.date.localeCompare(a.date),
+  );
 
   async function confirmDelete() {
     const ok = await guard(() => removeExpense(deleting.id), "Expense deleted");
@@ -30,29 +32,59 @@ export default function VodafonePage() {
 
   return (
     <div>
-      <PageHeader title="Vodafone Cash" subtitle="Money coming in from clients and what goes out" />
+      <PageHeader
+        title="Vodafone Cash"
+        subtitle="Money coming in from clients and what goes out"
+      />
 
       <div className="mb-5 grid grid-cols-3 gap-3">
-        <StatCard stack icon={CreditCard} label="Balance" value={money(derived.vodafoneBalance)} tone="crimson" />
-        <StatCard stack icon={Download} label="Received" value={money(inflow)} tone="olive" />
-        <StatCard stack icon={Upload} label="Spent" value={money(outflow)} tone="rust" />
+        <StatCard
+          stack
+          icon={CreditCard}
+          label="Balance"
+          value={money(derived.vodafoneBalance)}
+          tone="crimson"
+        />
+        <StatCard
+          stack
+          icon={Download}
+          label="Received"
+          value={money(inflow)}
+          tone="olive"
+        />
+        <StatCard
+          stack
+          icon={Upload}
+          label="Spent"
+          value={money(outflow)}
+          tone="rust"
+        />
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
         <Card>
-          <h3 className="px-4 pt-4 font-serif text-base font-bold text-ink">Payments Received</h3>
+          <h3 className="px-4 pt-4 font-serif text-base font-bold text-ink">
+            Payments Received
+          </h3>
           {derived.inflows.length === 0 ? (
             <EmptyState>No Vodafone Cash payments recorded yet.</EmptyState>
           ) : (
             <ul className="divide-y divide-line-soft">
               {derived.inflows.map(({ client, txn }) => (
                 <li key={txn.id}>
-                  <Link to={`/clients/${client.id}`} className="flex items-center justify-between gap-3 px-4 py-3 active:bg-card-alt">
+                  <Link
+                    to={`/clients/${client.id}`}
+                    className="flex items-center justify-between gap-3 px-4 py-3 active:bg-card-alt"
+                  >
                     <div className="min-w-0">
-                      <p className="truncate text-sm font-semibold text-ink">{client.name}</p>
+                      <p className="truncate text-sm font-semibold text-ink">
+                        {client.name}
+                      </p>
                       <p className="text-xs text-muted">{txn.date}</p>
                     </div>
-                    <span className="text-sm font-bold text-olive-dark">+{money(txn.amount)}</span>
+                    <span className="text-sm font-bold text-olive-dark">
+                      +{money(txn.amount)}
+                    </span>
                   </Link>
                 </li>
               ))}
@@ -62,8 +94,17 @@ export default function VodafonePage() {
 
         <Card>
           <div className="flex items-center justify-between px-4 pt-4">
-            <h3 className="font-serif text-base font-bold text-ink">Expenses</h3>
-            <Button size="sm" variant="crimson" icon={Plus} onClick={() => setAdding(true)}>Add</Button>
+            <h3 className="font-serif text-base font-bold text-ink">
+              Expenses
+            </h3>
+            <Button
+              size="sm"
+              variant="crimson"
+              icon={Plus}
+              onClick={() => setAdding(true)}
+            >
+              Add
+            </Button>
           </div>
           {expenses.length === 0 ? (
             <EmptyState>No expenses recorded yet.</EmptyState>
@@ -72,10 +113,14 @@ export default function VodafonePage() {
               {expenses.map((e) => (
                 <li key={e.id} className="flex items-center gap-3 px-4 py-3">
                   <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-semibold text-ink">{e.description}</p>
+                    <p className="truncate text-sm font-semibold text-ink text-wrap">
+                      {e.description}
+                    </p>
                     <p className="text-xs text-muted">{e.date}</p>
                   </div>
-                  <span className="text-sm font-bold text-rust-dark">-{money(e.amount)}</span>
+                  <span className="text-sm font-bold text-rust-dark">
+                    -{money(e.amount)}
+                  </span>
                   <button
                     onClick={() => setDeleting(e)}
                     aria-label="Delete expense"
